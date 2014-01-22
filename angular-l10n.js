@@ -18,13 +18,14 @@ angular.module('troch.l10n', ['ngLocale']).provider('$l10n', function() {
         initLocale = localeId;
     };
 
-    this.$get = ['$locale', function($locale) {
+    this.$get = ['$locale', '$rootScope', function($locale, $rootScope) {
             var setLocale = function(localeId) {
                 if (angular.isObject(availableLocales[localeId]) && localeId !== $locale.id) {
                     $locale.DATETIME_FORMATS = availableLocales[localeId].DATETIME_FORMATS;
                     $locale.NUMBER_FORMATS = availableLocales[localeId].NUMBER_FORMATS;
                     $locale.id = localeId;
                     $locale.pluralCat = availableLocales[localeId].pluralCat;
+                    $rootScope.$broadcast('l10n.localeChange');
                 }
             };
             if (!angular.isUndefined(initLocale)) {
