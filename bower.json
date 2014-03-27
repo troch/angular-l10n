@@ -1,0 +1,16 @@
+{
+    "name": "angular-l10n",
+    "version": "0.0.1",
+    "main": "angular-l10n.js",
+    "ignore": [
+        "locale/angular",
+        "locale/js",
+        ".bowerrc",
+        ".gitignore",
+        "bower.json",
+        "README.md"
+    ],
+    "dependencies": {
+        "angular": ">=1.0.8"
+    }
+}
