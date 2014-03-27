@@ -1,9 +1,8 @@
 module.exports = function(grunt) {
 
     /* Read options */
-    var buildLocales = grunt.option('buildLocales') || false,
-        locales = eval(grunt.option('locales')) || [];
-    
+    var locales = grunt.option('locales') ? grunt.option('locales').split(',') : [];
+
     function buildJsonLocaleFile(file) {
         var regexp = 'angular-locale_(.*).js',
             matches = file.match(regexp);
@@ -52,11 +51,19 @@ module.exports = function(grunt) {
 
     function addLocalesAndCopyFile() {
         var placeHolder = "/*LOCALES_HERE*/",
-            replaceWith = '';
-        for (var i = 0; i < locales.length; i++) {
-            replaceWith += grunt.file.read('locale/min/' + locales[i] + '.min.js') + "\n";
+            replaceWith = '',
+            file;
+        console.log(locales);
+        if (locales === ['all']) {
+            grunt.file.recurse('locale/min/', function (file) {
+                replaceWith += grunt.file.read(file) + "\n";
+            });
+        } else {
+            for (var i = 0; i < locales.length; i++) {
+                replaceWith += grunt.file.read('locale/min/' + locales[i] + '.min.js') + "\n";
+            }
         }
-        var file = grunt.file.read('angular-l10n.js');
+        file = grunt.file.read('angular-l10n.js');
         //grunt.file.copy('angular-l10n.js', 'build/angular-l10n.js');
         grunt.file.write('build/angular-l10n.js', file.replace(placeHolder, replaceWith));
     }
@@ -93,29 +100,40 @@ module.exports = function(grunt) {
                     dead_code : false
                 }
             },
-            release : {
+            build : {
                 options: {
                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n\'use strict\';\n'
                 },
-                files: {'build/<%= pkg.name %>-<%= pkg.version %>.min.js' : 'build/angular-l10n.js'}
+                files: {'build/angular-l10n.min.js' : 'build/angular-l10n.js'}
             }
         }
     });
 
     /* Load the plugins that provide tasks. */
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    //grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-jsbeautifier');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    /* Register default task */
-    if (buildLocales === true) {
+    grunt.registerTask('buildLocales', 'Build javascript locale files from angular locale files', function () {
         grunt.file.recurse('locale/angular', buildJsonLocaleFile);
-        grunt.registerTask('default', ['uglify:locales', 'jsbeautifier']);
-    } else {
-        // add locales to release
+    });
+
+    grunt.registerTask('addLocales', 'Add desired locales to build file', function () {
         addLocalesAndCopyFile();
-        grunt.registerTask('default', ['jshint', 'uglify:release']);
-    }
+    });
+
+    grunt.registerTask('default', [
+        'buildLocales',
+        'uglify:locales',
+        'jsbeautifier'
+    ]);
+
+    grunt.registerTask('build', [
+        'addLocales',
+        'jshint',
+        'uglify:build'
+    ]);
+
+
     return grunt;
 };

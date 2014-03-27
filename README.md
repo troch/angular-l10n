@@ -12,7 +12,9 @@ By default, no locales are included in angular-l10n.js. All locales available wi
 
 ### With grunt
 Run the following command line with the locales you want to be available in your angular application. Example:
-`grunt --locales=['en-gb', 'fr-fr']`
+`grunt --locales=en-gb,fr-fr`
+For all locales (not recommended):
+`grunt --locales=all`
 
 ### Without grunt
 Simply replace `/*LOCALES_HERE*/` in angular-l10n.js by the locales required in your application. All locales are located in folders `locale/js` or `locale/min` (non-uglified and uglified files). The final file should look like below:

@@ -1,6 +1,6 @@
 {
     "name": "troch-angular-l10n",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "angular-l10n.js",
     "ignore": [
         "locale/angular",
@@ -8,9 +8,10 @@
         ".bowerrc",
         ".gitignore",
         "bower.json",
+        ".bower.json",
         "README.md"
     ],
     "dependencies": {
-        "angular": ">=1.0.8"
+        "angular": ">=1.2.0"
     }
 }
