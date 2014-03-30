@@ -45,7 +45,9 @@ module.exports = function(grunt) {
                 dest = filePath.replace(path, 'locale/min').replace('.js', '.min.js');
             list[dest] = source;
         };
-        grunt.file.recurse('locale/js', rec);
+        if (grunt.file.exists('locale/js') === true) {
+            grunt.file.recurse('locale/js', rec);
+        }
         return list;
     }
 

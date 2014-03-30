@@ -1,6 +1,6 @@
 {
     "name": "troch-angular-l10n",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "angular-l10n.js",
     "ignore": [
         "locale/angular",
