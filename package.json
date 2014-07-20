@@ -3,7 +3,7 @@
   "repository": "https://github.com/troch/angular-l10n",
   "name": "angular-l10n",
   "version": "0.1.0",
-  "description": "Angular plugin for changing localisation on the fly",
+  "description": "Angular module for changing localisation on the fly",
   "dependencies": {},
   "devDependencies": {
     "gulp": "~3.8.6",
