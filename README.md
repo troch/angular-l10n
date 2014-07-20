@@ -10,14 +10,12 @@ Building library
 ----------------
 By default, no locales are included in angular-l10n.js. All locales available with angularjs can be used in your applicaation. For including locales you need in your app:
 
-### With grunt
+### With gulp
 Run the following command line with the locales you want to be available in your angular application. Example:
-`grunt --locales=en-gb,fr-fr`
-For all locales (not recommended):
-`grunt --locales=all`
+`gulp build --locales=en-gb,fr-fr`
 
-### Without grunt
-Simply replace `/*LOCALES_HERE*/` in angular-l10n.js by the locales required in your application. All locales are located in folders `locale/js` or `locale/min` (non-uglified and uglified files). The final file should look like below:
+### Without gulp
+Simply replace `/*LOCALES_HERE*/` in angular-l10n.js with the list of ocales required by your application. All locales are located in folders `locales/js` or `locales/min` (non-uglified and uglified files). The final file should look like below:
 
     }).config(['$l10nProvider', function($l10nProvider) {
         $l10nProvider.addLocale(function(){ ... id:'fr-fr',...}());

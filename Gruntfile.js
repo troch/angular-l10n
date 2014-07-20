@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['angular-l10n.js'],
+            files: ['angular-l10n.js', 'filters.js'],
             options: {
                 es5: true,
                 curly: true,
@@ -115,6 +115,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-jsbeautifier');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     grunt.registerTask('buildLocales', 'Build javascript locale files from angular locale files', function () {
         grunt.file.recurse('locale/angular', buildJsonLocaleFile);
@@ -133,6 +134,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', [
         'addLocales',
         'jshint',
+        'concat'
         'uglify:build'
     ]);
 

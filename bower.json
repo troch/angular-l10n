@@ -1,10 +1,10 @@
 {
     "name": "troch-angular-l10n",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "main": "angular-l10n.js",
     "ignore": [
-        "locale/angular",
-        "locale/js",
+        "locales/angular",
+        "locales/js",
         ".bowerrc",
         ".gitignore",
         "bower.json",
